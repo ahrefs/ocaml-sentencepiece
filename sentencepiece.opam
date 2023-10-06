@@ -1,0 +1,29 @@
+opam-version: "2.0"
+synopsis: "SentencePiece bindings for OCaml"
+description: "Bindings for SentencePiece, an unsupervised text tokenizer for Neural Network-based text generation."
+maintainer: ["Tianyi Song <tianyi.song@ahrefs.com>"]
+authors: "Ahrefs <github@ahrefs.com>" 
+homepage: "https://github.com/ahrefs/ocaml-sentencepiece"
+bug-reports: "https://github.com/ahrefs/ocaml-sentencepiece/issues"
+depends: [
+  "ocaml"
+  "dune" {>= "3.8" build}
+  "ounit2" {with-test}
+  "ctypes"
+  "dune-configurator"
+]
+depexts: [
+   ["libsentencepiece-dev"] {os-family = "debian"} 
+]
+build: [
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@runtest" {with-test}
+  ]
+]
+dev-repo: "git+https://github.com/ahrefs/ocaml-sentencepiece"

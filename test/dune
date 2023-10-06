@@ -1,0 +1,4 @@
+(test
+ (name test)
+ (libraries sentencepiece ounit2)
+ (deps ./trivial.model))

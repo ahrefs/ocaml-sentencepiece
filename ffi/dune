@@ -1,0 +1,44 @@
+; pkg-config
+
+(executable
+ (modules discover)
+ (name discover)
+ (libraries dune-configurator))
+
+(rule
+ (targets c_flags.sexp c_library_flags.sexp c_ctypes_cflags)
+ (deps
+  (env_var PKG_CONFIG_PATH))
+ (action
+  (run ./discover.exe)))
+
+(library
+ (name sentencepiece_ffi)
+ (public_name sentencepiece.ffi)
+ (modules :standard \ discover)
+ (libraries integers)
+ ; ctypes backward compatibility shims warn sometimes; suppress them
+ (flags
+  (:standard -w -9-27))
+ (foreign_stubs
+  (language cxx)
+  (names sentencepiece_wrapper)
+  (flags
+   (:standard
+    -fpermissive
+    --std=c++17
+    (:include c_flags.sexp))))
+ (ctypes
+  (external_library_name sentencepiece)
+  (build_flags_resolver pkg_config)
+  (headers
+   (preamble "#include \"sentencepiece_wrapper.h\""))
+  (type_description
+   (instance Type)
+   (functor Sentencepiece_types))
+  (function_description
+   (concurrency sequential)
+   (instance Functions)
+   (functor Sentencepiece_stubs))
+  (generated_types Types_generated)
+  (generated_entry_point Ffi)))

@@ -1,0 +1,4 @@
+(library
+ (name sentencepiece)
+ (public_name sentencepiece)
+ (libraries ctypes sentencepiece.ffi integers bigarray-compat))
