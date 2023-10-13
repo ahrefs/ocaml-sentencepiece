@@ -37,7 +37,7 @@
    (instance Type)
    (functor Sentencepiece_types))
   (function_description
-   (concurrency sequential)
+   (concurrency unlocked)
    (instance Functions)
    (functor Sentencepiece_stubs))
   (generated_types Types_generated)
