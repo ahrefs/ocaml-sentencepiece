@@ -1,16 +1,16 @@
-.PHONY:
+.PHONY: build
 build:
 	dune build .
 
-.PHONY:
+.PHONY: test
 test:
 	dune test
 
-.PHONY:
+.PHONY: fmt
 fmt:
 	dune build @fmt --auto-promote
 	clang-format -i ffi/*.cc ffi/*.h
 
-.PHONY:
+.PHONY: clean
 clean:
 	dune clean
