@@ -1,3 +1,3 @@
 (lang dune 3.8)
-(using ctypes 0.1)
+(using ctypes 0.3)
 (name sentencepiece)
