@@ -6,7 +6,7 @@
  (libraries dune-configurator))
 
 (rule
- (targets c_flags.sexp c_library_flags.sexp c_ctypes_cflags)
+ (targets c_flags.sexp c_library_flags.sexp)
  (deps
   (env_var PKG_CONFIG_PATH))
  (action
@@ -20,6 +20,9 @@
  ; ctypes backward compatibility shims warn sometimes; suppress them
  (flags
   (:standard -w -9-27))
+ (c_library_flags
+  (:standard
+   (:include c_library_flags.sexp)))
  (foreign_stubs
   (language cxx)
   (names sentencepiece_wrapper)
